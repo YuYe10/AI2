@@ -11,7 +11,7 @@ logger = logging.get_logger("datasets")
 
 logger.debug("GET")
 # you only need to download the dataset
-squad = load_dataset("squad", split="train[:5000]")
+squad = load_dataset("G:/AI/AI2/squad", split="train[:5000]")
 print(squad)
 
 '''
