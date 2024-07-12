@@ -3,7 +3,7 @@ import os
 import pandas as pd
 from datasets import Dataset, DatasetDict
 
-os.chdir("G:/AI/AI2/2-dataset")
+os.chdir("/mnt/g/AI/AI2/2-dataset")
 # 读取数据集
 data = pd.read_parquet("data/data.parquet")
 num_rows = len(data)
@@ -41,6 +41,7 @@ FEATURES = {
 # 定义数据集配置
 BUILDER_CONFIG = DatasetDict({
     "default": {
+        "version": "1.0.0",
         "train": train_dataset,
         "test": test_dataset,
         "features": FEATURES
