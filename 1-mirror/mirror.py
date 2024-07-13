@@ -1,3 +1,4 @@
+''' Download from hf-mirror.com'''
 from datasets import load_dataset
 from evaluate import load
 from transformers import AutoModelForQuestionAnswering
@@ -15,7 +16,7 @@ print(squad)
 
 '''
 model = AutoModelForQuestionAnswering.from_pretrained(
-    "distilbert/distilbert-base-uncased"
+    "distilbert/distilbert-base-uncased", trust_remote_code=True
 )
 
 # evaluation metric cannot be downloaded from hf-mirror
