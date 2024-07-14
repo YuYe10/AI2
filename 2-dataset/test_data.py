@@ -2,7 +2,7 @@ import os
 import unittest
 import pandas as pd
 
-
+os.chdir("G:/AI/AI2/2-dataset")
 tot_num = 25_000
 
 

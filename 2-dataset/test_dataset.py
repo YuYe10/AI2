@@ -3,12 +3,12 @@ import unittest
 
 from datasets import load_dataset, Dataset
 
-
+os.chdir("G:/AI/AI2/2-dataset")
 class TestDataset(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.dataset_dict = load_dataset("data", name="default", data_dir="data", trust_remote_mode=True)
+        cls.dataset_dict = load_dataset("data/data.py", name="default", data_dir="data", trust_remote_code=True)
 
     def _test_dataset(self, dataset: Dataset):
         self.assertEqual(dataset.version, "1.0.0")

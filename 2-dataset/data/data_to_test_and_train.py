@@ -2,6 +2,9 @@
 import os
 import pandas as pd
 
+# 修改本地工作路径
+os.chdir('G:/AI/AI2/2-dataset/data')
+
 # 读取数据集
 data = pd.read_parquet("data/data.parquet")
 ''' This is a test output

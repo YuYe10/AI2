@@ -1,36 +1,29 @@
 ''' Loading Dataset'''
-import pandas as pd
-from datasets import Dataset
+import os
+from datasets import load_dataset, Features
 
-# 读取第一节中分割的数据 train.parquet 和 test.parquet
-train_data = pd.read_parquet("2-dataset/data/train.parquet")
-test_data = pd.read_parquet("2-dataset/data/train.parquet") 
-
-# 将 pandas DataFrame 转换为字典
-train_dict = train_data.to_dict(orient='list')
-test_dict = test_data.to_dict(orient='list')
+# 修改本地工作路径
+os.chdir('G:/AI/AI2/2-dataset/data')
 
 # 定义特征
-FEATURES = {
+FEATURES = Features({
     "text": "string",
     "label": "int8"
-}
+})
 
-# 创建数据集
-train_dataset = Dataset.from_dict(train_dict, features=FEATURES)
-test_dataset = Dataset.from_dict(test_dict, features=FEATURES)
+# 读取第一节中分割的数据 train.parquet 和 test.parquet
+dataset = load_dataset("parquet", data_files={'train': 'train.parquet', \
+    'test': 'test.parquet'})
 
 # 定义数据集配置
 BUILDER_CONFIG = {
-    "name": "default",
-    "version": "1.0.0",
+        "name": "default" ,
+        "version": "1.0.0",
+        "test": dataset['test'],
+        "train": dataset['train'],
+    
 }
 
-# 创建包含train和test数据集的字典
-dataset_dict = {
-    'train': train_dataset,
-    'test': test_dataset,
-}
-
-# 将数据集对象转换为包含builder配置的数据集对象
-dataset = Dataset(dataset_dict, info=BUILDER_CONFIG)
+# 保存数据集
+dataset.save_to_disk("~")
+print(dataset)
