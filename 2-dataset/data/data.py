@@ -1,29 +1,25 @@
 ''' Loading Dataset'''
 import os
-from datasets import load_dataset, Features
+from datasets import load_dataset, Features, BuilderConfig
 
 # 修改本地工作路径
 os.chdir('G:/AI/AI2/2-dataset/data')
 
 # 定义特征
 FEATURES = Features({
-    "text": 'string',
-    "label": 'int8',
+     'text':'string',
+    'label':'int8',
 })
 
-# 读取第一节中分割的数据 train.parquet 和 test.parquet
-dataset = load_dataset("parquet", data_files={'train': 'train.parquet', \
-    'test': 'test.parquet'})
+BUILDER_CONFIG = BuilderConfig({ 
+    'name': 'default', 
+    'version': '1.0.0', 
+    'train': 'train.parquet',
+    'test': 'test.parquet'
+})
 
-# 定义数据集配置
-BUILDER_CONFIG = {
-        "default" :{
-        "version": "1.0.0",
-        "test": dataset['test'],
-        "train": dataset['train'],
-        }
-}
+# 获取数据集
+dataset_dict = load_dataset('parquet', features=FEATURES, name='deafult',  data_files={'train': \
+'train.parquet', 'test': 'test.parquet'}, version='1.0.0', data_dir='G:/AI/AI2/2-dataset/data')
 
-# 保存数据集
-dataset.save_to_disk("~")
-print(dataset)
+print(dataset_dict)
