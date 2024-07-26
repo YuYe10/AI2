@@ -1,25 +1,19 @@
 ''' Loading Dataset'''
 import os
-from datasets import load_dataset, Features, BuilderConfig
+from datasets import load_dataset, BuilderConfig
 
 # 修改本地工作路径
 os.chdir('G:/AI/AI2/2-dataset/data')
 
 # 定义特征
-FEATURES = Features({
+FEATURES = {
      'text':'string',
     'label':'int8',
-})
+}
 
-BUILDER_CONFIG = BuilderConfig({ 
-    'name': 'default', 
-    'version': '1.0.0', 
-    'train': 'train.parquet',
-    'test': 'test.parquet'
-})
+BUILDER_CONFIG = BuilderConfig(name='default', version='1.0.0',)
 
 # 获取数据集
-dataset_dict = load_dataset('parquet', features=FEATURES, name='deafult',  data_files={'train': \
-'train.parquet', 'test': 'test.parquet'}, version='1.0.0', data_dir='G:/AI/AI2/2-dataset/data')
+dataset = load_dataset('parquet', data_files={'train': 'train.parquet', 'test': 'test.parquet'})
 
-print(dataset_dict)
+print(dataset)
