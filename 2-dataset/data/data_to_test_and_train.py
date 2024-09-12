@@ -2,11 +2,8 @@
 import os
 import pandas as pd
 
-# 修改本地工作路径
-os.chdir('G:/AI/AI2/2-dataset/data')
-
 # 读取数据集
-data = pd.read_parquet("data/data.parquet")
+data = pd.read_parquet("2-dataset/data/data.parquet")
 ''' This is a test output
     num_rows = len(data)
     is_null_value = data.isnull().values.any()
@@ -34,6 +31,6 @@ test_data = data_balanced[~data_balanced.index.isin(train_data.index)]
 
 # 保存训练集和测试集为 parquet 文件
 os.makedirs("data", exist_ok=True)
-train_data.to_parquet("data/train.parquet", index=False)
-test_data.to_parquet("data/test.parquet", index=False)
+train_data.to_parquet("2-dataset/data/train.parquet", index=False)
+test_data.to_parquet("2-dataset/data/test.parquet", index=False)
 ''' end: copy from SiderAI'''
