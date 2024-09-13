@@ -7,7 +7,7 @@ class TestDataset(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.dataset_dict = load_dataset("data", name="default", data_dir="2-dataset/data", trust_remote_code=True)
+        cls.dataset_dict = load_dataset("2-dataset/data/data.py", name="default", trust_remote_code=True)
 
     def _test_dataset(self, dataset: Dataset):
         self.assertEqual(dataset.version, "1.0.0")
