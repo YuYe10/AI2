@@ -1,4 +1,3 @@
-import os
 import unittest
 
 from datasets import load_dataset, Dataset

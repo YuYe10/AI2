@@ -4,6 +4,12 @@ import pyarrow.parquet as pq
 from datasets import DownloadManager, DatasetInfo
 
 class DefaultDataset(datasets.GeneratorBasedBuilder):
+    BUILDER_CONFIGS = [
+        datasets.BuilderConfig(
+            name="default",
+            version=datasets.Version("1.0.0"),
+        ),
+    ]
 
     def _info(self) -> DatasetInfo:
         """
@@ -15,7 +21,8 @@ class DefaultDataset(datasets.GeneratorBasedBuilder):
             features=datasets.Features({
                     "text": datasets.Value("string"),
                     "label":datasets.Value("int8"),
-                })
+                }),
+            supervised_keys=None,  
         )
 
     def _split_generators(self, dl_manager: DownloadManager):
@@ -29,10 +36,14 @@ class DefaultDataset(datasets.GeneratorBasedBuilder):
         """
         return [
             datasets.SplitGenerator(name=datasets.Split.TRAIN, 
-                    gen_kwargs={"filepath": "./train.parquet"}),
+                    gen_kwargs={"filepath": "2-dataset/data/train.parquet",
+                    },
+                ),
             datasets.SplitGenerator(name=datasets.Split.TEST,
-                    gen_kwargs={"filepath": "./test.parquet"}),
-                ]
+                    gen_kwargs={"filepath": "2-dataset/data/test.parquet",
+                    },
+                ),
+            ]
 
     def _generate_examples(self, filepath):
         """
@@ -48,15 +59,8 @@ class DefaultDataset(datasets.GeneratorBasedBuilder):
         df = table.to_pandas()  
 
         # 遍历 DataFrame 生成样本  
-        for idx, row in df.iterrows():  
-            yield idx, {  
-                "text": row["text"],  
-                "label": row["label"]  
-            }  
-class DefaultBuilderConfig(datasets.BuilderConfig):
-    BUILDER_CONFIG = [
-        datasets.BuilderConfig(
-            name="default",
-            version=datasets.Version("1.0.0"),
-        ),
-    ]
+        for idx,row in df.iterrows():  
+            yield idx, {
+                    "text": row["text"],  # 使用 DataFrame 行中的文本  
+                    "label": row["label"],  # 使用 DataFrame 行中的标签 
+                }  
