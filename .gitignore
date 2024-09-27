@@ -1,2 +1,3 @@
-.venv
-result
+.venv/
+3-model/results/
+3-model/sentiment_model
