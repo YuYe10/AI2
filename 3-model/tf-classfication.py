@@ -4,7 +4,7 @@ from datasets import load_dataset
 
 # %%
 dataset = load_dataset("G:/AI/AI2/2-dataset/data/data.py",name="default")
-dataset
+# dataset
 
 # %%
 import torch
@@ -16,7 +16,7 @@ def tokenize(batch):
 tokenized_datasets = dataset.map(tokenize, batched=True)
 tokenized_datasets = tokenized_datasets.rename_column("label", "labels")
 tokenized_datasets.set_format('torch', columns=['input_ids', 'attention_mask', 'labels'])
-tokenized_datasets
+# tokenized_datasets
 
 # %%
 model = AutoModelForSequenceClassification.from_pretrained('G:/Model/bert-base-uncased', num_labels=2)
